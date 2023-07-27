@@ -2,8 +2,9 @@
   "name": "react_practice",
   "version": "1.0.0",
   "description": "Namaste React practice with Akshay Saini",
-  "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
