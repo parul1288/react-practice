@@ -1,21 +1,30 @@
+import { CDN_URL } from "../utils/constants";
+
 const RestaurantCard = (props) => {
-  
-    const { resData } = props
-    const { name, cuisines, imageId, costForTwo, avgRating } = resData;
-  
-    return (
-      <div className="res-card">
-        <img
-          alt="restaurant image"
-          src="https://assets.gqindia.com/photos/6213cbed18140d747a9b0a6e/16:9/pass/new%20restaurant%20menus%20in%20Mumbai.jpg"
-          className="res-img"
-        />
-        <p>{name}</p>
-        <p>{cuisines.join(", ")}</p>
-        <p>{costForTwo}</p>
-        <p>{avgRating} stars</p>
-      </div>
-    );
+  const { resData } = props;
+  const {
+    name,
+    cuisines,
+    cloudinaryImageId,
+    costForTwo,
+    avgRating,
+    sla,
+  } = resData?.info;
+
+  return (
+    <div className="res-card">
+      <img
+        alt="restaurant image"
+        src={CDN_URL + cloudinaryImageId}
+        className="res-img"
+      />
+      <h3>{name}</h3>
+      <p>{cuisines.join(", ")}</p>
+      <p>{costForTwo}</p>
+      <p>{avgRating} stars</p>
+      <p>{sla.deliveryTime} minutes</p>
+    </div>
+  );
 };
 
 export default RestaurantCard;
