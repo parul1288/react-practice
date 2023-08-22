@@ -15,25 +15,28 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  if (!onlineStatus) return <h2>Looks like you are not connected!</h2>
+  if (!onlineStatus) return <h2>Looks like you are not connected!</h2>;
 
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0790239&lng=72.9080122&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    
+
+    console.log(json);
     setListOfRestaurants(
-      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
   };
 
-  if (listOfRestaurants?.length === 0) return <Shimmer />;
-  
-  return (
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body-section">
       <div className="filter">
         <div className="search">
