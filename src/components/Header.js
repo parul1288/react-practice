@@ -8,25 +8,25 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="header">
+    <div className="flex justify-between">
       <div className="logo">
-        <img className="logo-img" alt="food delivery logo" src={LOGO_URL} />
+        <img className="w-32" alt="food delivery logo" src={LOGO_URL} />
       </div>
-      <div className="nav-links">
-        <ul>
-          <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
-          <li>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="mx-4">Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
+          <li className="mx-4">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="mx-4">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="mx-4">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>Cart</li>
+          <li className="mx-4">Cart</li>
           <button
-            className="login-btn"
+            className="mx-4"
             onClick={() =>
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
             }
