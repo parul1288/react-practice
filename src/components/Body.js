@@ -1,9 +1,10 @@
 import RestaurantCard, { withVegetarianLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { list } from "postcss";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -15,6 +16,8 @@ const Body = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const {loggedInUser} = useContext(UserContext)
 
   const onlineStatus = useOnlineStatus();
 
@@ -46,6 +49,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body-section">
+      <h2 className="m-2 p-2 font-bold text-orange-600 text-xl">Hi {loggedInUser}!</h2>
       <div className="flex">
         <div className="search">
           <input
