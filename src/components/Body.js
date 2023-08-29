@@ -20,24 +20,29 @@ const Body = () => {
 
   if (!onlineStatus) return <h2>Looks like you are not connected!</h2>;
 
+  const setStateVariable = (jsonData) => {
+    const cardData = jsonData.data.cards.filter(
+      (item) => item.card.card.id === "restaurant_grid_listing"
+    );
+
+    setListOfRestaurants(
+      cardData[0].card.card.gridElements.infoWithStyle.restaurants
+    );
+    
+    setFilteredRestaurants(
+      cardData[0].card.card.gridElements.infoWithStyle.restaurants
+    );
+  };
+
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0790239&lng=72.9080122&page_type=DESKTOP_WEB_LISTING"
     );
-    const json = await data.json();
-
-    console.log(json);
-    setListOfRestaurants(
-      json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilteredRestaurants(
-      json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+    const jsonData = await data.json();
+    setStateVariable(jsonData);
   };
 
-  return !listOfRestaurants || listOfRestaurants.length == 0 ? (
+  return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
     <div className="body-section">
